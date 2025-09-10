@@ -341,130 +341,35 @@ footer,
     border: 1.5px solid #222;
 }
 
-/* PDF Section Creative */
-.pdf-section {
-    min-height: 340px;
-    display: flex;
-    align-items: stretch;
-    background: #101010;
-    color: #fff;
+/* ===== Statuto PDF section (semplice + HD) ===== */
+.statuto-section .statuto-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fa 100%);
+  border: 1px solid #e8eaee;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
+}
+.statuto-section .statuto-copy h3 { letter-spacing: .2px; }
+.statuto-section .statuto-copy p { color: #6b7280; }
+.statuto-section .btn-statuto {
+  border-radius: 999px;
+  padding: .65rem 1.1rem;
+  border: 1px solid #1f2937;
 }
 
-.pdf-section .pdf-anim-fill {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-        radial-gradient(circle at 30% 35%, rgba(255, 90, 60, .35), transparent 60%),
-        radial-gradient(circle at 70% 65%, rgba(255, 0, 0, .25), transparent 65%),
-        linear-gradient(135deg, #420000, #160000 55%, #000 100%);
-    animation: pdfBGShift 14s linear infinite;
+/* Pixel camera SVG: dimensioni e animazioni */
+.statuto-art svg { width: 140px; height: auto; image-rendering: pixelated; }
+.statuto-art .flash { animation: flashPulse 4s ease-in-out infinite; }
+@keyframes flashPulse {
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  18% { opacity: 0; }
+  100% { opacity: 0; }
 }
 
-@keyframes pdfBGShift {
-    0% {
-        filter: hue-rotate(0deg) brightness(.95);
-    }
-
-    50% {
-        filter: hue-rotate(25deg) brightness(1.05);
-    }
-
-    100% {
-        filter: hue-rotate(0deg) brightness(.95);
-    }
-}
-
-.pdf-section .pdf-icon-wrapper.mega {
-    font-size: clamp(4.5rem, 12vw, 11rem);
-    opacity: .16;
-    animation: floatY 6s ease-in-out infinite;
-    filter: drop-shadow(0 8px 25px rgba(255, 90, 60, .35));
-}
-
-.pdf-section .pdf-icon-wrapper.mega .spark {
-    width: 22px;
-    height: 22px;
-    top: 14%;
-    right: 18%;
-    box-shadow: 0 0 22px 6px rgba(255, 255, 255, .55);
-}
-
-.pdf-section .pdf-content {
-    width: 100%;
-    backdrop-filter: blur(6px);
-    background: linear-gradient(135deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04));
-    border: 1px solid rgba(255, 255, 255, .15);
-    border-radius: 1.25rem;
-    margin: 1.25rem;
-    position: relative;
-    z-index: 2;
-}
-
-.pdf-section .tag-chip {
-    background: linear-gradient(90deg, #ff3d2e, #c40000);
-    box-shadow: 0 3px 10px -2px rgba(255, 60, 40, .45);
-}
-
-.pdf-section .pdf-tags .tag-chip:nth-child(2) {
-    background: linear-gradient(90deg, #ff8a00, #e52e71);
-}
-
-.pdf-section .pdf-tags .tag-chip:nth-child(3) {
-    background: linear-gradient(90deg, #009efd, #2af598);
-}
-
-.pdf-section .pdf-tags .tag-chip:nth-child(4) {
-    background: linear-gradient(90deg, #7f00ff, #e100ff);
-}
-
-.btn-pdf-primary {
-    background: linear-gradient(90deg, #ff3d2e, #ff7a2e);
-    color: #fff;
-    border: none;
-    box-shadow: 0 6px 18px -4px rgba(255, 61, 46, .55);
-    transition: .3s;
-}
-
-.btn-pdf-primary:hover,
-.btn-pdf-primary:focus {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px -6px rgba(255, 61, 46, .65);
-    color: #fff;
-}
-
-.btn-preview-toggle {
-    background: rgba(255, 255, 255, .15);
-    border: 1px solid rgba(255, 255, 255, .3);
-    color: #fff;
-    transition: .25s;
-}
-
-.btn-preview-toggle:hover,
-.btn-preview-toggle:focus {
-    background: rgba(255, 255, 255, .25);
-}
-
-.pdf-frame-wrapper iframe {
-    background: #000;
-}
-
-@media (max-width: 767.98px) {
-    .pdf-section {
-        min-height: 420px;
-    }
-
-    .pdf-section .pdf-content {
-        margin: .9rem;
-        padding: 1.8rem !important;
-    }
-
-    .pdf-section .pdf-icon-wrapper.mega {
-        font-size: 55vw;
-        opacity: .12;
-    }
+/* Responsive */
+@media (max-width: 575.98px) {
+  .statuto-section .statuto-card { padding: 1rem !important; }
+  .statuto-art { display: none; }
 }
 
 /* Responsive layout for main sections and cards */
@@ -758,14 +663,183 @@ footer,
 
 /* Smartphone: evita sovrapposizione dello scroll indicator con il testo */
 @media (max-width: 575.98px) {
-  .hero-content {
-    top: 48% !important;
-    transform: translateY(-48%) !important;
-    padding-bottom: 64px !important; /* spazio dedicato allo scroll indicator */
-  }
-  .scroll-indicator {
-    bottom: 6px !important;        /* più vicino al bordo inferiore */
-    font-size: 1.1rem !important;  /* leggermente più piccolo su mobile */
-    z-index: 1 !important;         /* dietro al testo */
+    .hero-content {
+        top: 48% !important;
+        transform: translateY(-48%) !important;
+        padding-bottom: 64px !important;
+        /* spazio dedicato allo scroll indicator */
+    }
+
+    .scroll-indicator {
+        bottom: 6px !important;
+        /* più vicino al bordo inferiore */
+        font-size: 1.1rem !important;
+        /* leggermente più piccolo su mobile */
+        z-index: 1 !important;
+        /* dietro al testo */
+    }
+}
+
+/* Mobile: banner Sostienici con immagine full-width separata dal bottone */
+@media (max-width: 575.98px) {
+    .banner-fade {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow: hidden;
+        /* mantiene i bordi arrotondati del banner */
+    }
+
+    /* testo con padding laterale dedicato */
+    .banner-fade .row>.col-md-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* immagine: staccata dal bottone e a tutta larghezza */
+    .banner-fade .row>.col-md-4 {
+        padding: 0 !important;
+    }
+
+    .banner-fade .row>.col-md-4 img {
+        display: block;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        /* override dello stile inline */
+        border-radius: 0 !important;
+        margin-top: 0.75rem;
+        /* spazio dal bottone */
+    }
+}
+
+/* Mobile: immagine banner con bordi più rotondi e spazio laterale interno */
+@media (max-width: 575.98px) {
+    .banner-fade .row>.col-md-4 img {
+        width: calc(100% - 1.5rem) !important;
+        /* lascia spazio ai lati */
+        margin: 1rem .75rem 0 !important;
+        /* top + spazio sinistra/destra */
+        border-radius: 16px !important;
+        /* bordi più rotondi */
+    }
+}
+
+/* Mobile: estetica banner Sostienici con bordi arrotondati e spazio laterale */
+@media (max-width: 575.98px) {
+    .banner-fade {
+        margin-left: 0.75rem !important;
+        margin-right: 0.75rem !important;
+        border-radius: 18px !important;
+    }
+
+    .banner-fade .row>.col-md-4 img {
+        margin-top: 1rem !important;
+        /* più spazio dal bottone */
+    }
+}
+
+/* Main section: refresh visivo delle card (dinamico e meno plasticoso) */
+.row.g-4 .card {
+  position: relative;
+  border-radius: 16px !important;
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+/* Mantieni i colori, ma con gradienti morbidi e profondità */
+.row.g-4 .card.bg-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+.row.g-4 .card.bg-success {
+  background: linear-gradient(135deg, #198754 0%, #157347 100%) !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+.row.g-4 .card.bg-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9f05 100%) !important;
+  border-color: rgba(0,0,0,.08) !important;
+}
+
+/* Overlay leggero per evitare effetto plasticoso */
+.row.g-4 .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(800px 400px at 10% 0%, rgba(255,255,255,.16), transparent 40%),
+    radial-gradient(600px 300px at 90% 100%, rgba(0,0,0,.14), transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: .9;
+  transition: opacity .22s ease;
+}
+
+/* Hover più elegante (sostituisce lo scale generico) */
+.row.g-4 .card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,0,0,.22), 0 3px 10px rgba(0,0,0,.12);
+}
+
+/* Tipografia e spaziature più curate */
+.row.g-4 .card .card-body { padding: 1.25rem 1rem; }
+.row.g-4 .card .card-title { letter-spacing: .3px; text-shadow: 0 1px 1px rgba(0,0,0,.18); }
+.row.g-4 .card .card-title a { text-decoration: none; }
+.row.g-4 .card .card-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Separatore per il contenuto collassabile */
+.row.g-4 .card .collapse {
+  border-top: 1px solid rgba(255,255,255,.18);
+  margin-top: .5rem;
+  padding-top: .75rem;
+}
+.row.g-4 .card.bg-warning .collapse { border-top-color: rgba(0,0,0,.12); }
+
+/* Main cards: gradienti animati, bordo gradiente e focus accessibile */
+.row.g-4 .card.bg-primary,
+.row.g-4 .card.bg-success,
+.row.g-4 .card.bg-warning {
+  background-size: 180% 180% !important;
+  background-position: 0% 50% !important;
+  transition: background-position .6s ease, transform .22s ease, box-shadow .22s ease;
+}
+.row.g-4 .card.bg-primary:hover,
+.row.g-4 .card.bg-success:hover,
+.row.g-4 .card.bg-warning:hover {
+  background-position: 100% 50% !important;
+}
+
+/* Bordo gradiente reattivo (sottile) */
+.row.g-4 .card::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 16px; padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.05), rgba(0,0,0,.15));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .0; transition: opacity .22s ease;
+  pointer-events: none;
+}
+.row.g-4 .card:hover::before { opacity: .45; }
+
+/* Focus dentro la card (accessibilità) */
+.row.g-4 .card:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.25), 0 12px 28px rgba(0,0,0,.22);
+}
+
+/* Animazione contenuto quando la sezione collassabile si apre */
+@keyframes cardContentIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.row.g-4 .card .collapse.show > * { animation: cardContentIn .38s ease-out both; }
+
+/* Riduci motion se richiesto */
+@media (prefers-reduced-motion: reduce) {
+  .row.g-4 .card,
+  .row.g-4 .card::before,
+  .row.g-4 .card .collapse.show > * {
+    transition: none !important; animation: none !important;
   }
 }

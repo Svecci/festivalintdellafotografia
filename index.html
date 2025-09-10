@@ -268,49 +268,35 @@
         </div>
     </div>
 
-    <!-- Sezione Download PDF -->
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <section class="pdf-section position-relative overflow-hidden rounded-4 shadow-lg">
-                    <div class="pdf-anim-fill">
-                        <div class="pdf-icon-wrapper mega">
-                            <i class="bi bi-filetype-pdf"></i>
-                            <span class="spark"></span>
-                        </div>
-                    </div>
-                    <div class="pdf-content position-relative text-center text-md-start p-4 p-md-5">
-                        <h5 class="fw-bold mb-2 d-flex flex-column flex-md-row align-items-center gap-2 justify-content-center justify-content-md-start">
-                            Statuto & Linee Guida 2025
-                            <span class="badge bg-dark-subtle text-dark-emphasis border fw-normal">v1.0</span>
-                        </h5>
-                        <p class="text-muted small mb-3 mx-auto mx-md-0" style="max-width:640px;">
-                           "Questo statuto definisce i principi, gli scopi e l’organizzazione dell’associazione che promuove, attraverso il linguaggio fotografico, cultura, visione e consapevolezza contemporanea."
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-                            <a href="./Immagini/Documenti/StatutoUfficiale.pdf" target="_blank" rel="noopener"
-                               class="btn btn-pdf-primary px-4">
-                                <i class="bi bi-box-arrow-up-right me-1"></i>Apri PDF
-                            </a>
-
-                        </div>
-                        <div class="collapse mt-4" id="pdfPreview">
-                            <div class="ratio ratio-16x9 border rounded overflow-hidden shadow-sm pdf-frame-wrapper">
-                                <iframe src="./Immagini/Documenti/StatutoUfficiale.pdf#view=FitH" title="Anteprima PDF"
-                                        loading="lazy"></iframe>
-                            </div>
-                            <div class="text-end mt-2">
-                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse"
-                                        data-bs-target="#pdfPreview">
-                                    Chiudi anteprima
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="noise-overlay"></span>
-                </section>
-            </div>
+    <!-- Sezione Statuto (PDF) -->
+    <div class="container my-5 statuto-section" id="statuto">
+      <div class="statuto-card p-4 p-md-5">
+        <div class="row align-items-center">
+          <div class="col-md-8 statuto-copy">
+            <h3 class="mb-2">Statuto & Linee Guida</h3>
+            <p class="mb-3">Consulta lo statuto ufficiale dell’associazione. Puoi aprirlo in una pagina dedicata per una lettura ottimale.</p>
+            <a href="./Immagini/Documenti/StatutoUfficiale.pdf" target="_blank" rel="noopener" class="btn btn-light btn-statuto d-inline-flex align-items-center gap-2">
+              <i class="bi bi-box-arrow-up-right"></i>
+              Visualizza PDF
+            </a>
+          </div>
+          <div class="col-md-4 d-flex justify-content-center statuto-art">
+            <!-- Pixel-art fotocamera con flash -->
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- corpo camera -->
+              <rect x="8" y="18" width="48" height="30" fill="#222" />
+              <rect x="12" y="14" width="16" height="10" fill="#333" />
+              <!-- obiettivo -->
+              <circle cx="40" cy="33" r="10" fill="#111" />
+              <circle cx="40" cy="33" r="7" fill="#444" />
+              <circle cx="40" cy="33" r="4" fill="#888" />
+              <!-- flash -->
+              <rect x="50" y="16" width="8" height="6" fill="#555" />
+              <rect class="flash" x="52" y="14" width="6" height="4" fill="#fff" />
+            </svg>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Footer -->

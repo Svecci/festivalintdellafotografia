@@ -280,3 +280,35 @@ document.addEventListener("DOMContentLoaded", function() {
         document.head.appendChild(style);
     }
 })();
+
+        // Animazioni scroll / parallax hero
+        (function(){
+            const hero = document.querySelector('.hero-section');
+            const bg = hero?.querySelector('.hero-bg');
+            if(!hero || !bg) return;
+            let lastY = window.scrollY;
+            const maxShift = 120; // px parallax
+            function onScroll(){
+                const y = window.scrollY;
+                // Parallax + leggero fade
+                const shift = Math.min(maxShift, y*0.45);
+                const opacity = Math.max(0, 1 - y/600);
+                bg.style.transform = `translateY(${shift * .35}px) scale(${1 + Math.min(.14, y/5000)})`;
+                hero.style.setProperty('--heroOverlayA', `rgba(0,0,0,${.55 + Math.min(.25, y/900)})`);
+                hero.style.setProperty('opacity', opacity.toString());
+                if(y > 140) hero.classList.add('is-shrunk'); else hero.classList.remove('is-shrunk');
+                lastY = y;
+            }
+            let ticking = false;
+            window.addEventListener('scroll', ()=>{
+                if(!ticking){
+                    requestAnimationFrame(()=>{
+                        onScroll();
+                        ticking=false;
+                    });
+                    ticking=true;
+                }
+            }, {passive:true});
+            // Kickstart
+            onScroll();
+        })();

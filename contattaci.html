@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contattaci</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="contattaci.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black py-1 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="immagini/loghi/Bianco Nero Moderno Minimal Geometrico Monogramma Iniziali Design Logo (1.920 x 1.080 px).zip - 3.png"
+                    alt="Logo Festival" class="me-2">
+                Benvenuti al Festival
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="bi bi-list"></span>
+            </button>
+            <div class="collapse navbar-collapse show" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programma.html">Programma</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="storiaDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Storia
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="storiaDropdown">
+                            <li><a class="dropdown-item" href="storia-2024.html">2024</a></li>
+                            <li><a class="dropdown-item" href="storia-2025.html">2025</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mostre.html">Mostre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contattaci.html">Contatti</a>
+                    </li>
+
+                </ul>
+                <!-- Barra di ricerca -->
+                <form class="d-flex ms-auto my-2 my-lg-0" role="search" id="siteSearchForm">
+                    <input class="form-control form-control-sm me-2" type="search" placeholder="Cerca..."
+                        aria-label="Cerca" id="siteSearchInput">
+                    <button class="btn btn-outline-light btn-sm" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Contatti -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h2 class="mb-4 text-center text-primary">Contattaci</h2>
+                        <p class="text-center mb-4">
+                            Vuoi unirti al Festival? Compila il modulo qui sotto.<br>
+                            <strong>Per inviare una semplice richiesta:</strong> inserisci Nome, Email, Oggetto e
+                            Messaggio.<br>
+                            <strong>Per iscriverti come socio:</strong> clicca sul bottone <b>"Iscriviti come socio"</b>
+                            qui sotto, compila anche Cognome, Telefono e Codice Fiscale. Il sistema compilerà
+                            automaticamente Oggetto e Messaggio.<br>
+                            Dopo aver compilato tutti i dati, clicca su <b>Paga con PayPal</b> per completare
+                            l'iscrizione.<br>
+                            La quota associativa è di 15 euro.
+                        </p>
+                        <form action="https://formsubmit.co/itzsvecci@hotmail.it" method="POST" id="contactForm">
+                            <div class="text-center mb-4">
+                                <button type="button" id="iscrizioneSwitchBtn"
+                                    class="btn btn-outline-success btn-lg rounded-pill px-4 py-2 transition">
+                                    <i class="bi bi-person-plus me-2"></i>Iscriviti come socio
+                                </button>
+                                <input class="form-check-input d-none" type="checkbox" id="iscrizioneSwitch">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="nome" name="nome"
+                                    placeholder="Il tuo nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cognome" class="form-label">Cognome <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="cognome" name="cognome"
+                                    placeholder="Il tuo cognome" disabled data-socio-field>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Telefono <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="telefono" name="telefono"
+                                    placeholder="Il tuo telefono" disabled data-socio-field>
+                            </div>
+                            <div class="mb-3">
+                                <label for="codiceFiscale" class="form-label">Codice Fiscale <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="codiceFiscale"
+                                    name="codiceFiscale" placeholder="Il tuo codice fiscale" disabled data-socio-field>
+                            </div>
+                            <!-- NUOVO CAMPO INDIRIZZO (solo soci) -->
+                            <div class="mb-3">
+                                <label for="indirizzo" class="form-label">Indirizzo <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="indirizzo" name="indirizzo"
+                                    placeholder="Via / Piazza, Numero Civico, Città" disabled data-socio-field>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">La tua Email <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control rounded-pill" id="email" name="email"
+                                    placeholder="La tua email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="oggetto" class="form-label">Oggetto <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-pill" id="oggetto" name="oggetto"
+                                    placeholder="Oggetto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Messaggio <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control rounded-4" id="message" name="message" rows="5"
+                                    placeholder="Il tuo messaggio" required></textarea>
+                            </div>
+                            <!-- Checkbox Consenso Privacy -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="privacyConsent">
+                                <label class="form-check-label small" for="privacyConsent">
+                                    Acconsento al trattamento dei dati personali ai sensi del Reg. UE 679/2016 (GDPR) e
+                                    dichiaro di aver letto l'Informativa Privacy.
+                                </label>
+                                <button type="button" class="btn btn-link p-0 ms-2 align-baseline small"
+                                    data-bs-toggle="modal" data-bs-target="#privacyModal">
+                                    Leggi Informativa
+                                </button>
+                            </div>
+                            <div class="text-center small fw-semibold mb-4">Garante della privacy il Presidente</div>
+                            <!-- Protezione antispam -->
+                            <input type="text" name="_honey" style="display:none">
+                            <!-- Disattiva CAPTCHA di default -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <div class="d-grid">
+                                <button type="submit" id="sendBtn" class="btn btn-primary btn-lg rounded-pill" disabled
+                                    style="opacity:.5; pointer-events:none;">
+                                    <i class="bi bi-envelope-fill me-2"></i>Invia
+                                </button>
+                            </div>
+                            <div class="d-grid mt-3">
+                                <a href="https://www.paypal.com/paypalme/itzsvecci/15" target="_blank"
+                                    class="btn btn-warning btn-lg rounded-pill" id="paypalBtn"
+                                    style="pointer-events:none; opacity:0.5;">
+                                    <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal"
+                                        style="width:28px; height:28px; vertical-align:middle; margin-right:8px;">
+                                    Paga con PayPal
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Grazie -->
+    <div id="thankYouPopup" class="modal fade" tabindex="-1" aria-labelledby="thankYouLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title w-100" id="thankYouLabel">Grazie!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Grazie della mail inviata.<br>Ti risponderemo al più presto.</p>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modale Informativa Privacy -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="privacyModalLabel">Informativa Privacy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="mb-3">Informativa sulla Privacy e Consenso al Trattamento dei Dati Personali
+                    </h5>
+                    <p class="small fst-italic">(ai sensi del Regolamento UE 2016/679 – GDPR e del D.Lgs. 196/2003 così come
+                        modificato dal D.Lgs. 101/2018)</p>
+
+                    <h6 class="mt-4">1. Titolare del Trattamento</h6>
+                    <ul class="small">
+                        <li>Denominazione: Festival Internazionale della Fotografia – Associazione di Promozione Sociale
+                            iscritta al RUNTS, sezione APS</li>
+                        <li>Sede legale: Via Cornice S.Ambrogio</li>
+                        <li>Codice Fiscale:</li>
+                        <li>Contatti: festivaldellafotografia@gmail.con, Festivaltintdellafotografia@pec.it, 3285871596
+                        </li>
+                        <li>Rappresentante legale: Canale Giacomo</li>
+                    </ul>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">2. Finalità del Trattamento</h6>
+                    <p class="small mb-1">I dati personali sono trattati per:</p>
+                    <ol class="small">
+                        <li>Gestione delle attività associative, comprese iscrizioni, convocazioni, comunicazioni interne,
+                            partecipazione agli eventi e manifestazioni organizzate dall’associazione.</li>
+                        <li>Adempimento di obblighi di legge previsti per APS (es. tenuta del registro soci, documentazione
+                            contabile).</li>
+                        <li>Promozione e documentazione delle attività associative (pubblicazione di immagini, video e
+                            contenuti su canali social, sito web e materiale promozionale).</li>
+                        <li>Invio di comunicazioni informative e promozionali riguardanti attività, progetti ed eventi futuri
+                            del Festival e dell’Associazione.</li>
+                    </ol>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">3. Base Giuridica</h6>
+                    <p class="small mb-1">Il trattamento avviene su una o più delle seguenti basi:</p>
+                    <ul class="small">
+                        <li>Esecuzione di un contratto/rapporto associativo (art. 6.1.b GDPR)</li>
+                        <li>Adempimento di obblighi legali (art. 6.1.c GDPR)</li>
+                        <li>Consenso dell’interessato (art. 6.1.a GDPR)</li>
+                        <li>Legittimo interesse dell’associazione (art. 6.1.f GDPR), in particolare per la promozione delle
+                            attività.</li>
+                    </ul>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">4. Tipologia di Dati Raccolti</h6>
+                    <ul class="small">
+                        <li>Dati identificativi: nome, cognome, data e luogo di nascita, codice fiscale, indirizzo, telefono,
+                            email.</li>
+                        <li>Eventuali dati particolari (art. 9 GDPR) solo se strettamente necessari per la gestione delle
+                            attività associative (es. per esigenze alimentari, sanitarie o assicurative durante eventi).</li>
+                    </ul>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">5. Modalità di Trattamento e Conservazione</h6>
+                    <ul class="small">
+                        <li>I dati sono trattati in forma cartacea e/o elettronica, protetti da misure di sicurezza
+                            adeguate.</li>
+                        <li>Conservazione: per tutta la durata del rapporto associativo e, successivamente, per il tempo
+                            previsto dalla normativa civilistica, fiscale e assicurativa.</li>
+                    </ul>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">6. Comunicazione e Diffusione</h6>
+                    <p class="small mb-1">I dati possono essere comunicati a:</p>
+                    <ul class="small">
+                        <li>Enti pubblici (per obblighi di legge)</li>
+                        <li>Partner tecnici e fornitori di servizi (es. assicurazioni, tipografie, piattaforme digitali)</li>
+                        <li>In caso di immagini/video, potranno essere diffusi su internet e social network, nei limiti del
+                            consenso prestato.</li>
+                    </ul>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">7. Diritti dell’Interessato</h6>
+                    <p class="small">L’interessato può esercitare i diritti previsti dagli artt. 15-22 del GDPR (accesso,
+                        rettifica, cancellazione, limitazione, portabilità, opposizione) inviando richiesta ai contatti
+                        indicati. È possibile revocare il consenso in qualsiasi momento senza pregiudicare la liceità del
+                        trattamento già effettuato. Reclamo: Garante per la Protezione dei Dati Personali.</p>
+                    <div class="text-center">⸻</div>
+
+                    <h6 class="mt-4">8. Trasferimenti Extra UE</h6>
+                    <p class="small">Eventuali trasferimenti di dati verso Paesi non appartenenti all’UE avverranno solo se
+                        garantito un adeguato livello di protezione ai sensi del GDPR.</p>
+
+                    <hr>
+                    <p class="small mb-0">Selezionando la casella di consenso dichiari di aver letto e compreso la
+                        presente informativa.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h5>Festival Internazionale della Fotografia</h5>
+                    <img src="immagini/loghi/Bianco Nero Moderno Minimal Geometrico Monogramma Iniziali Design Logo (1.920 x 1.080 px).zip - 3.png"
+                        alt="Logo Festival" style="width:150px; height:100px; object-fit:contain; margin-top:8px;">
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled mb-2">
+                        <li>Email: festivaldellafotografia@gmail.com</li>
+                        <li>Phone: 3285871596</li>
+                        <li>Codice Fiscale: 90088230108</li>
+                    </ul>
+                    <div>
+                        <a href="https://www.instagram.com/festivalintdellafotografia/" target="_blank"
+                            class="text-light me-3">
+                            <i class="bi bi-instagram" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/16msZjtmwe/?mibextid=wwXIfr" target="_blank"
+                            class="text-light me-3">
+                            <i class="bi bi-facebook" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a href="https://youtube.com/@festivalintdellafotografia?si=FAeP2rAmRvADMcnM" target="_blank"
+                            class="text-light">
+                            <i class="bi bi-youtube" style="font-size: 1.5rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="contattaci.js"></script>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

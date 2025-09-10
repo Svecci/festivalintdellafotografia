@@ -728,3 +728,19 @@ footer,
     object-position: center center !important;
   }
 }
+
+/* Smartphone: più spazio ai bordi */
+@media (max-width: 575.98px) {
+  .container,
+  .container.my-5,
+  .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Navbar collassata più ariosa */
+  .navbar-collapse {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}

@@ -341,3 +341,40 @@ footer,
         max-height: 100px !important;
     }
 }
+/* Mobile: nascondi la scrollbar ma mantieni lo scroll */
+@media (max-width: 576px) {
+  html, body {
+    overflow: auto; /* mantiene lo scroll verticale */
+    overflow-x: hidden; /* evita scroll orizzontale accidentale */
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* IE/Edge legacy */
+    scrollbar-width: none;   /* Firefox */
+  }
+
+  /* WebKit (Chrome, Safari, Android) */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+}
+
+
+
+/* Smartphone: più spazio ai bordi */
+@media (max-width: 575.98px) {
+  .container,
+  .container.my-5,
+  .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Navbar collassata più ariosa */
+  .navbar-collapse {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}

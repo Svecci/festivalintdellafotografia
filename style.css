@@ -715,3 +715,16 @@ footer,
     background: transparent !important;
   }
 }
+
+/* Smartphone: centra la hero image e rimuovi il fixed */
+@media (max-width: 575.98px) {
+  .hero-section .hero-bg {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover;
+    object-position: center center !important;
+  }
+}

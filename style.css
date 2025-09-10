@@ -54,34 +54,36 @@
     opacity: 0;
     animation: fadeInUp 1s 0.5s forwards;
 }
-        /* Tagline hero migliorata */
-        .hero-title {
-            line-height: 1.15;
-        }
 
-        .hero-title .hero-kicker {
-            font-size: clamp(1rem, 1.1vw + .9rem, 1.35rem);
-            letter-spacing: .28em;
-            text-transform: uppercase;
-            font-weight: 500;
-            opacity: .85;
-        }
+/* Tagline hero migliorata */
+.hero-title {
+    line-height: 1.15;
+}
 
-        .hero-title .hero-main {
-            font-size: clamp(2.2rem, 3.6vw + 1rem, 4.2rem);
-            font-weight: 700;
-            background: linear-gradient(100deg,
-                #fff7d1 0%,
-                #ffe6c9 18%,
-                #ffd7e3 36%,
-                #efd6ff 54%,
-                #d6ecff 72%,
-                #d7f8ef 90%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .28));
-        }
+.hero-title .hero-kicker {
+    font-size: clamp(1rem, 1.1vw + .9rem, 1.35rem);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: .85;
+}
+
+.hero-title .hero-main {
+    font-size: clamp(2.2rem, 3.6vw + 1rem, 4.2rem);
+    font-weight: 700;
+    background: linear-gradient(100deg,
+            #fff7d1 0%,
+            #ffe6c9 18%,
+            #ffd7e3 36%,
+            #efd6ff 54%,
+            #d6ecff 72%,
+            #d7f8ef 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .28));
+}
+
 /* Hero title scrolled effect */
 .hero-title--scrolled {
     font-size: 2rem !important;
@@ -272,7 +274,7 @@ footer,
     left: 50%;
     bottom: 14px;
     transform: translateX(-50%);
-    color: #fff;
+    color: #ffffff;
     font-size: 1.35rem;
     opacity: .75;
     animation: bounce 2.2s ease-in-out infinite;
@@ -698,51 +700,72 @@ footer,
 
 /* Mobile: nascondi la scrollbar ma mantieni lo scroll */
 @media (max-width: 576px) {
-  html, body {
-    overflow: auto; /* mantiene lo scroll verticale */
-    overflow-x: hidden; /* evita scroll orizzontale accidentale */
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* IE/Edge legacy */
-    scrollbar-width: none;   /* Firefox */
-  }
 
-  /* WebKit (Chrome, Safari, Android) */
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  *::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-    background: transparent !important;
-  }
+    html,
+    body {
+        overflow: auto;
+        /* mantiene lo scroll verticale */
+        overflow-x: hidden;
+        /* evita scroll orizzontale accidentale */
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        /* IE/Edge legacy */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* WebKit (Chrome, Safari, Android) */
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+    }
 }
 
 
 
 /* Smartphone: più spazio ai bordi */
 @media (max-width: 575.98px) {
-  .container,
-  .container.my-5,
-  .container-fluid {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
 
-  /* Navbar collassata più ariosa */
-  .navbar-collapse {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
+    .container,
+    .container.my-5,
+    .container-fluid {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Navbar collassata più ariosa */
+    .navbar-collapse {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
 }
 
 /* Smartphone: centra la hero image e rimuovi il fixed */
 @media (max-width: 575.98px) {
-  .hero-section .hero-bg {
-    position: absolute !important;
-    inset: 0;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    object-fit: cover;
-    object-position: center center !important;
+    .hero-section .hero-bg {
+        position: absolute !important;
+        inset: 0;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        object-fit: cover;
+        object-position: center center !important;
+    }
+}
+
+/* Smartphone: evita sovrapposizione dello scroll indicator con il testo */
+@media (max-width: 575.98px) {
+  .hero-content {
+    top: 48% !important;
+    transform: translateY(-48%) !important;
+    padding-bottom: 64px !important; /* spazio dedicato allo scroll indicator */
+  }
+  .scroll-indicator {
+    bottom: 6px !important;        /* più vicino al bordo inferiore */
+    font-size: 1.1rem !important;  /* leggermente più piccolo su mobile */
+    z-index: 1 !important;         /* dietro al testo */
   }
 }

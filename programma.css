@@ -52,7 +52,22 @@
   z-index: 1;
   transition: opacity .2s ease;
 }
-.poster-section .poster-card:hover::after { opacity: .22; }
+.poster-section .poster-card:hover::after { opacity: .30; }
 /* Assicura che overlay/testo restino sopra il velo */
 .poster-section .poster-card .poster-overlay { z-index: 2; }
 .poster-section .poster-card .stretched-link { z-index: 3; }
+
+/* Overlay: allinea sempre a sinistra e limita la larghezza dei testi */
+.poster-section .poster-card .poster-overlay {
+  align-items: flex-start !important; /* evita stretch full-width su mobile */
+}
+.poster-section .poster-overlay .date-badge { display: inline-block; width: auto; }
+.poster-section .poster-overlay h5 {
+  display: inline-block;
+  width: auto;
+  max-width: 85%; /* evita di riempire tutta la card */
+}
+@media (max-width: 575.98px) {
+  .poster-section .poster-overlay { padding: .75rem !important; }
+  .poster-section .poster-overlay h5 { max-width: 80%; }
+}

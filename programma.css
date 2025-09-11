@@ -1,222 +1,58 @@
-/* Sfondo bianco per il resto della pagina */
-main,
-footer,
-.banner-fade,
-.row.g-4,
-.card,
-.navbar {
-    background: #fff;
+/* === Modal: animazione apertura e poster ben visualizzato === */
+#eventPosterModal .modal-dialog {
+  transform: scale(.98);
+  opacity: 0;
+  transition: transform .22s ease, opacity .22s ease;
 }
+#eventPosterModal.show .modal-dialog { transform: scale(1); opacity: 1; }
 
-.navbar-brand img {
-    width: 150px !important;
-    height: 100px !important;
-    object-fit: contain;
+/* Poster box responsive e centrato */
+#eventPosterModal .poster-img-box {
+  min-height: 60vh;
+  max-height: 82vh;
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
 }
-
-#eventiContainer {
-    margin-top: 48px;
-    padding-top: 24px;
+#eventPosterModal #modalPosterImg {
+  width: 100%; height: 100%; object-fit: contain;
+  opacity: 0; transition: opacity .22s ease;
 }
+#eventPosterModal.img-ready #modalPosterImg { opacity: 1; }
 
-/* Responsive layout for main sections and cards */
-@media (max-width: 991.98px) {
-    .row.g-4 > .col-md-4,
-    .row.g-4 > .col-lg-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-bottom: 1.5rem;
-    }
-    .card {
-        margin-bottom: 1.5rem;
-    }
-    .navbar-nav.flex-row {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        width: 100%;
-    }
-    .navbar-collapse {
-        background: #111;
-        border-radius: 0 0 12px 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-        padding: 1rem 0.5rem;
-    }
-    .navbar-toggler {
-        border: none;
-        background: transparent;
-        font-size: 1.7rem;
-        color: #fff;
-        margin-right: 0.5rem;
-    }
-    .navbar-toggler:focus {
-        outline: none;
-        box-shadow: none;
-    }
-    .navbar-nav .nav-link {
-        padding: 0.7rem 1rem;
-        font-size: 1.1rem;
-        border-radius: 8px;
-        margin-bottom: 0.2rem;
-        width: 100%;
-    }
-    .navbar .ms-auto {
-        margin-top: 1rem;
-        width: 100%;
-        text-align: center;
-    }
-    .hero-section {
-        height: 30vh !important;
-        min-height: 160px !important;
-    }
-    .banner-fade,
-    .bg-primary.banner-fade {
-        padding: 1.5rem 0.5rem !important;
-    }
-    .container.my-5 {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-    .col-lg-10, .col-lg-8 {
-        max-width: 100% !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-    .col-md-5, .col-md-7 {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-    .ps-md-5, .pe-md-5 {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-    .btn-art-impact {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
-    }
-    .img-fluid {
-        max-width: 100% !important;
-        height: auto !important;
-    }
-    .navbar-brand img {
-        width: 110px !important;
-        height: 70px !important;
-    }
+/* Pannello dettagli scrollabile se necessario */
+#eventPosterModal .col-lg-5 { max-height: 82vh; overflow: auto; }
+
+/* Feedback al click sulla card (senza traslazioni persistenti) */
+.poster-section .poster-card { transition: box-shadow .2s ease; }
+.poster-section .poster-card:active { transform: none !important; }
+
+/* Poster grid: dimensioni uniformi per tutte le card */
+.poster-section .poster-card { aspect-ratio: 3 / 4; width: 100%; }
+.poster-section .poster-card img { display: block; width: 100%; height: 100%; object-fit: cover; transform: none !important; transition: none; }
+
+/* Stabilizza layout card: immagine assoluta e contenitori posizionati */
+.poster-section .poster-card { position: relative; overflow: hidden; }
+.poster-section .poster-card > img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transform: translateZ(0);
 }
+/* L’overlay non interferisce, il click passa al bottone */
+.poster-section .poster-card .poster-overlay { pointer-events: none; display: flex; align-items: flex-end; }
+/* Il trigger copre l’intera card e non altera il layout */
+.poster-section .poster-card .stretched-link { position: absolute; inset: 0; z-index: 3; }
+/* Evita outline che possa causare scroll/focus jump */
+.poster-section .poster-card .stretched-link:focus { outline: none; box-shadow: none; }
 
-/* Extra small devices */
-@media (max-width: 575.98px) {
-    .hero-section {
-        height: 22vh !important;
-        min-height: 100px !important;
-    }
-    .display-4 {
-        font-size: 2rem !important;
-    }
-    .card-title {
-        font-size: 1.2rem !important;
-    }
-    .btn-art-impact {
-        font-size: 0.95rem;
-        padding: 0.6rem 1rem;
-    }
-    .navbar-brand img {
-        width: 80px !important;
-        height: 50px !important;
-    }
-    .banner-fade,
-    .bg-primary.banner-fade {
-        padding: 1rem 0.2rem !important;
-    }
-    .container.my-5 {
-        padding-left: 0.2rem;
-        padding-right: 0.2rem;
-    }
+/* Veil HD: leggero velo scuro su tutte le card per migliorare il contrasto */
+.poster-section .poster-card::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.16);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity .2s ease;
 }
-
-/* Responsive for social section */
-@media (max-width: 991.98px) {
-    .col-md-5.text-center.d-flex.flex-column.align-items-end.pe-md-5,
-    .col-md-7.d-flex.flex-column.align-items-start.ps-md-5 {
-        align-items: center !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        text-align: center !important;
-    }
-    .col-md-7 h4,
-    .col-md-7 p {
-        text-align: center !important;
-    }
-    .gap-5 {
-        gap: 1.2rem !important;
-    }
-}
-
-/* Responsive for images in social section */
-@media (max-width: 575.98px) {
-    .d-flex.justify-content-center.align-items-center.gap-5.mb-4.w-100 > div {
-        margin-bottom: 1rem;
-    }
-    .d-flex.justify-content-center.align-items-center.gap-5.mb-4.w-100 {
-        flex-direction: column !important;
-        gap: 0.5rem !important;
-    }
-}
-
-/* Responsive footer */
-@media (max-width: 767.98px) {
-    footer .row {
-        flex-direction: column !important;
-    }
-    footer .col-md-6 {
-        margin-bottom: 1rem !important;
-    }
-    footer img {
-        width: 100px !important;
-        height: 60px !important;
-    }
-}
-
-/* Responsive for banner image */
-@media (max-width: 575.98px) {
-    .banner-fade img {
-        max-height: 100px !important;
-    }
-}
-
-/* Mobile: nascondi la scrollbar ma mantieni lo scroll */
-@media (max-width: 576px) {
-  html, body {
-    overflow: auto; /* mantiene lo scroll verticale */
-    overflow-x: hidden; /* evita scroll orizzontale accidentale */
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* IE/Edge legacy */
-    scrollbar-width: none;   /* Firefox */
-  }
-
-  /* WebKit (Chrome, Safari, Android) */
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  *::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-    background: transparent !important;
-  }
-}
-
-
-
-/* Smartphone: più spazio ai bordi */
-@media (max-width: 575.98px) {
-  .container,
-  .container.my-5,
-  .container-fluid {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
-  /* Navbar collassata più ariosa */
-  .navbar-collapse {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-}
+.poster-section .poster-card:hover::after { opacity: .22; }
+/* Assicura che overlay/testo restino sopra il velo */
+.poster-section .poster-card .poster-overlay { z-index: 2; }
+.poster-section .poster-card .stretched-link { z-index: 3; }

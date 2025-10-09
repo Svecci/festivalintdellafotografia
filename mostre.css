@@ -378,3 +378,94 @@ footer,
     padding-right: 1rem !important;
   }
 }
+
+      /* Work in progress: elegante e animato */
+      :root {
+        --wip-yellow: #f9c74f;
+        --wip-dark: #222;
+        --wip-border: #e6e8ec;
+        --wip-bg: #ffffff;
+        --wip-text: #1f2937;
+      }
+      .wip {
+        min-height: 60vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: var(--wip-text);
+      }
+      .wip-inner {
+        display: grid;
+        gap: 1.25rem;
+        justify-items: center;
+      }
+      .wip .beacon {
+        width: 14px; height: 14px; border-radius: 50%;
+        background: var(--wip-yellow);
+        position: relative;
+        box-shadow: 0 0 0 2px rgba(249,199,79,.25), 0 0 14px rgba(249,199,79,.5);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .wip .beacon::after {
+        content: "";
+        position: absolute; inset: -3px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(249,199,79,.35);
+        animation: ring 2.2s ease-out infinite;
+      }
+      .wip .sign {
+        background: var(--wip-bg);
+        border: 1px solid var(--wip-border);
+        border-radius: 12px;
+        padding: .9rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: .6rem;
+        box-shadow: 0 8px 20px rgba(16,24,40,.06);
+        font-weight: 600;
+        animation: float 3.2s ease-in-out infinite;
+      }
+      .wip .sign i {
+        color: var(--wip-yellow);
+        font-size: 1.15rem;
+      }
+      .wip .barriers {
+        display: flex; gap: .75rem; align-items: center; justify-content: center;
+        transform: translateZ(0);
+      }
+      .wip .barrier {
+        position: relative;
+        width: 160px; height: 18px; border-radius: 8px;
+        background: repeating-linear-gradient(-45deg, var(--wip-yellow) 0 12px, var(--wip-dark) 12px 24px);
+        box-shadow: 0 6px 14px rgba(16,24,40,.08);
+        animation: stripes 1s linear infinite;
+      }
+      .wip .barrier::before, .wip .barrier::after {
+        content: ""; position: absolute; top: -18px; width: 6px; height: 36px;
+        background: linear-gradient(var(--wip-dark) 0 50%, #444 50% 100%);
+        border-radius: 3px;
+      }
+      .wip .barrier::before { left: 10px; }
+      .wip .barrier::after  { right: 10px; }
+      .wip .delay { animation-delay: .35s; }
+      .wip p.lead {
+        margin: .5rem 0 0;
+        color: #4b5563;
+        font-size: 1.05rem;
+      }
+      @keyframes stripes { to { background-position: 60px 0; } }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+      }
+      @keyframes ring {
+        0% { box-shadow: 0 0 0 0 rgba(249,199,79,.35); opacity: 1; }
+        100% { box-shadow: 0 0 0 14px rgba(249,199,79,0); opacity: 0; }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .wip * { animation: none !important; transition: none !important; }
+      }

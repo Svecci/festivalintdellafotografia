@@ -1,0 +1,65 @@
+/* Name cloud elegante e sobria */
+.name-cloud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+  gap: 0.75rem 1rem;
+  justify-content: center;
+  align-items: start;
+}
+
+/* Chip base */
+.name-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--chip-bg, #f6f7f9);
+  color: var(--chip-fg, #1f2937);
+  border: 1px solid var(--chip-bd, #e6e8ec);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+  text-align: center;
+  white-space: normal;
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.02);
+  transform: none;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Dimensioni sobrie */
+.name-chip.sm { font-size: 0.92rem; }
+.name-chip.md { font-size: 1rem; }
+.name-chip.lg { font-size: 1.06rem; }
+.name-chip.xl { font-size: 1.12rem; }
+
+/* Palette neutra, leggere variazioni */
+.name-cloud .name-chip:nth-child(5n+1) { --chip-bg: #f6f7f9; }
+.name-cloud .name-chip:nth-child(5n+2) { --chip-bg: #f4f6f8; }
+.name-cloud .name-chip:nth-child(5n+3) { --chip-bg: #f7f8fa; }
+.name-cloud .name-chip:nth-child(5n+4) { --chip-bg: #f3f5f7; }
+.name-cloud .name-chip:nth-child(5n+5) { --chip-bg: #f5f6f7; }
+
+/* Interazione minima */
+.name-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.06);
+}
+.name-chip:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.05);
+}
+
+/* Accessibilità: rispetto preferenze riduzione animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .name-chip { transition: none; transform: none; }
+  .name-chip:hover, .name-chip:active { transform: none; }
+}
+
+/* Responsive fine-tuning */
+@media (min-width: 768px) {
+  .name-cloud {
+    grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+    gap: 0.85rem 1.1rem;
+  }
+}

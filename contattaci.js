@@ -120,7 +120,7 @@ document.getElementById('paypalBtn').addEventListener('click', function(e) {
     }
 
     // Precompila i dati PayPal (solo nota, prezzo già impostato)
-    const paypalUrl = "https://www.paypal.com/paypalme/svecci/15";
+    const paypalUrl = "https://www.paypal.com/paypalme/festivaldellafoto/8";
     const note = encodeURIComponent(
         `Iscrizione socio:\nNome: ${nome}\nCognome: ${cognome}\nTelefono: ${telefono}\nEmail: ${email}\nCodice Fiscale: ${codiceFiscale}\nIndirizzo: ${indirizzo}`
     );
@@ -128,7 +128,7 @@ document.getElementById('paypalBtn').addEventListener('click', function(e) {
 
     // Invia la mail di sicurezza tramite FormSubmit e poi reindirizza a PayPal
     e.preventDefault();
-    fetch("https://formsubmit.co/ajax/itzsvecci@hotmail.it", {
+    fetch("https://formsubmit.co/festivaldellafotografia@gmail.com", {
         method: "POST",
         body: JSON.stringify({
             nome: nome,

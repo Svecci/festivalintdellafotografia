@@ -1,17 +1,100 @@
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// Utility per mostrare popup di conferma
+function showThankYouPopup() {
+    var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouPopup'));
+    thankYouModal.show();
+}
+
+// Elementi
+const iscrizioneBtn = document.getElementById('iscrizioneSwitchBtn');
+const iscrizioneSwitch = document.getElementById('iscrizioneSwitch');
+const nome = document.getElementById('nome');
+const cognome = document.getElementById('cognome');
+const telefono = document.getElementById('telefono');
+const codiceFiscale = document.getElementById('codiceFiscale');
+const indirizzo = document.getElementById('indirizzo');
+const email = document.getElementById('email');
+const oggetto = document.getElementById('oggetto');
+const messaggio = document.getElementById('message');
+const privacy = document.getElementById('privacyConsent');
+const sendBtn = document.getElementById('sendBtn');
+const paypalBtn = document.getElementById('paypalBtn');
+const form = document.getElementById('contactForm');
+
+// Stato iniziale
+function setSocioMode(active) {
+    cognome.disabled = !active;
+    telefono.disabled = !active;
+    codiceFiscale.disabled = !active;
+    indirizzo.disabled = !active;
+    oggetto.disabled = active;
+    messaggio.disabled = active;
+
+    nome.disabled = false;
+    email.disabled = false;
+
+    if (active) {
+        oggetto.value = "Iscrizione";
+        messaggio.value = "Ciao mi sono iscritto!";
+    } else {
+        cognome.value = "";
+        telefono.value = "";
+        codiceFiscale.value = "";
+        indirizzo.value = "";
+        oggetto.value = "";
+        messaggio.value = "";
+        oggetto.disabled = false;
+        messaggio.disabled = false;
+    }
+    updateButtons();
+}
+
+// Aggiorna stato bottoni in base a modalità e consenso privacy
+function updateButtons() {
+    const isSocio = iscrizioneSwitch.checked;
+    const privacyOk = privacy.checked;
+
+    // Abilita/disabilita bottoni
+    if (isSocio) {
+        paypalBtn.style.pointerEvents = (privacyOk && nome.value && cognome.value && telefono.value && codiceFiscale.value && indirizzo.value && email.value) ? 'auto' : 'none';
+        paypalBtn.style.opacity = (paypalBtn.style.pointerEvents === 'auto') ? '1' : '0.5';
+        sendBtn.disabled = true;
+        sendBtn.style.opacity = '.5';
+        sendBtn.style.pointerEvents = 'none';
+    } else {
+        sendBtn.disabled = !(privacyOk && nome.value && email.value && oggetto.value && messaggio.value);
+        sendBtn.style.opacity = sendBtn.disabled ? '.5' : '1';
+        sendBtn.style.pointerEvents = sendBtn.disabled ? 'none' : 'auto';
+        paypalBtn.style.pointerEvents = 'none';
+        paypalBtn.style.opacity = '0.5';
+    }
+}
+
+// Toggle modalità socio
+iscrizioneBtn.addEventListener('click', function() {
+    iscrizioneSwitch.checked = !iscrizioneSwitch.checked;
+    setSocioMode(iscrizioneSwitch.checked);
+});
+
+// Aggiorna bottoni e campi su input
+[nome, cognome, telefono, codiceFiscale, indirizzo, email, oggetto, messaggio, privacy, iscrizioneSwitch].forEach(el => {
+    el.addEventListener('input', updateButtons);
+    el.addEventListener('change', updateButtons);
+});
+
+// Invio normale
+form.addEventListener('submit', function(e) {
     e.preventDefault();
-    var form = e.target;
+    if (sendBtn.disabled) return;
+    const formData = new FormData(form);
     fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { 'Accept': 'application/json' }
     }).then(function(response) {
         if (response.ok) {
-            var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouPopup'));
-            thankYouModal.show();
+            showThankYouPopup();
             form.reset();
-            document.getElementById('paypalBtn').style.pointerEvents = 'none';
-            document.getElementById('paypalBtn').style.opacity = '0.5';
+            setSocioMode(false);
         } else {
             alert('Errore nell\'invio. Riprova più tardi.');
         }
@@ -20,181 +103,50 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     });
 });
 
-// Bottone iscriviti dinamico
-const iscrizioneSwitchBtn = document.getElementById('iscrizioneSwitchBtn');
-const iscrizioneSwitch = document.getElementById('iscrizioneSwitch');
-iscrizioneSwitchBtn.addEventListener('click', function() {
-    iscrizioneSwitch.checked = !iscrizioneSwitch.checked;
-    this.classList.toggle('active', iscrizioneSwitch.checked);
-    document.getElementById('cognome').disabled = !iscrizioneSwitch.checked;
-    document.getElementById('telefono').disabled = !iscrizioneSwitch.checked;
-    document.getElementById('codiceFiscale').disabled = !iscrizioneSwitch.checked;
-    // ABILITA / DISABILITA INDIRIZZO SOLO IN MODALITÀ SOCIO
-    document.getElementById('indirizzo').disabled = !iscrizioneSwitch.checked;
-
-    // Disabilita oggetto e messaggio se iscrizione attiva
-    document.getElementById('oggetto').disabled = iscrizioneSwitch.checked;
-    document.getElementById('message').disabled = iscrizioneSwitch.checked;
-    if (!iscrizioneSwitch.checked) {
-        document.getElementById('cognome').value = '';
-        document.getElementById('telefono').value = '';
-        document.getElementById('codiceFiscale').value = '';
-        document.getElementById('indirizzo').value = ''; // reset indirizzo
-        document.getElementById('oggetto').value = '';
-        document.getElementById('message').value = '';
-    }
-    checkPaypalFields();
-    controlSendButton(); // NEW
-});
-
-// Modifica checkPaypalFields per abilitare PayPal solo se switch attivo e campi compilati
-function checkPaypalFields() {
-    const iscrizione = document.getElementById('iscrizioneSwitch').checked;
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const codiceFiscale = document.getElementById('codiceFiscale').value.trim();
-    const indirizzo = document.getElementById('indirizzo').value.trim();
-    const paypalBtn = document.getElementById('paypalBtn');
-    const consent = document.getElementById('privacyConsent'); // nuovo controllo consenso
-    // Se manca consenso privacy disabilita sempre
-    if (!consent || !consent.checked) {
-        paypalBtn.style.pointerEvents = 'none';
-        paypalBtn.style.opacity = '0.5';
-        return;
-    }
-    if (iscrizione && nome && cognome && telefono && email && codiceFiscale && indirizzo) {
-        paypalBtn.style.pointerEvents = 'auto';
-        paypalBtn.style.opacity = '1';
-    } else {
-        paypalBtn.style.pointerEvents = 'none';
-        paypalBtn.style.opacity = '0.5';
-    }
-}
-
-// NEW: gestione stato bottone Invia (disabilitato se iscrizione attiva)
-function controlSendButton() {
-    const sendBtn = document.getElementById('sendBtn');
-    const consent = document.getElementById('privacyConsent');
-    const membership = document.getElementById('iscrizioneSwitch').checked;
-    if (!sendBtn) return;
-    if (consent && consent.checked && !membership) {
-        sendBtn.disabled = false;
-        sendBtn.style.opacity = '';
-        sendBtn.style.pointerEvents = '';
-    } else {
-        sendBtn.disabled = true;
-        sendBtn.style.opacity = '.5';
-        sendBtn.style.pointerEvents = 'none';
-    }
-}
-
-// Aggiorna listeners includendo indirizzo
-['nome', 'cognome', 'telefono', 'email', 'codiceFiscale', 'indirizzo', 'iscrizioneSwitch'].forEach(function(id) {
-    document.getElementById(id).addEventListener('input', checkPaypalFields);
-    document.getElementById(id).addEventListener('change', checkPaypalFields);
-});
-
-// PayPal automatic mail + prefilled redirect
-document.getElementById('paypalBtn').addEventListener('click', function(e) {
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const codiceFiscale = document.getElementById('codiceFiscale').value.trim();
-    const indirizzo = document.getElementById('indirizzo').value.trim(); // include indirizzo
-
-    // Blocca se non tutti i campi sono compilati
-    if (!(nome && cognome && telefono && email && codiceFiscale && indirizzo)) {
+// Invio PayPal
+paypalBtn.addEventListener('click', function(e) {
+    if (paypalBtn.style.pointerEvents === 'none') {
         e.preventDefault();
         return;
     }
-
-    // Disabilita subito il bottone Invia per prevenire doppio invio
-    const sendBtn = document.getElementById('sendBtn');
-    if (sendBtn) {
-        sendBtn.disabled = true;
-        sendBtn.style.opacity = '.5';
-        sendBtn.style.pointerEvents = 'none';
-    }
-
-    // Precompila i dati PayPal (solo nota, prezzo già impostato)
-    const paypalUrl = "https://www.paypal.com/paypalme/festivaldellafoto/8";
-    const note = encodeURIComponent(
-        `Iscrizione socio:\nNome: ${nome}\nCognome: ${cognome}\nTelefono: ${telefono}\nEmail: ${email}\nCodice Fiscale: ${codiceFiscale}\nIndirizzo: ${indirizzo}`
-    );
-    this.href = `${paypalUrl}?note=${note}`;
-
-    // Invia la mail di sicurezza tramite FormSubmit e poi reindirizza a PayPal
     e.preventDefault();
-    fetch("https://formsubmit.co/festivaldellafotografia@gmail.com", {
-        method: "POST",
-        body: JSON.stringify({
-            nome: nome,
-            cognome: cognome,
-            telefono: telefono,
-            email: email,
-            codiceFiscale: codiceFiscale,
-            indirizzo: indirizzo,
-            oggetto: "Richiesta iscrizione socio tramite PayPal",
-            message: "Richiesta iscrizione socio. Dati:\nNome: " + nome + "\nCognome: " + cognome + "\nTelefono: " + telefono + "\nEmail: " + email + "\nCodice Fiscale: " + codiceFiscale + "\nIndirizzo: " + indirizzo + "\nPagamento: 15 euro tramite PayPal."
-        }),
-        headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+
+    // Imposta i valori necessari nel form principale
+    oggetto.value = "Iscrizione";
+    messaggio.value = "Ciao mi sono iscritto!";
+
+    // Crea una copia dei dati del form
+    const formData = new FormData(form);
+    formData.set('oggetto', "Iscrizione");
+    formData.set('message', "Ciao mi sono iscritto!");
+
+    // Log per debug
+    console.log('Invio dati iscrizione socio:', Array.from(formData.entries()));
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
     }).then(function(response) {
-        // Mostra popup di conferma anche per PayPal
+        console.log('Risposta fetch:', response.status, response.ok);
         if (response.ok) {
-            var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouPopup'));
-            thankYouModal.show();
+            showThankYouPopup();
             setTimeout(function() {
-                window.location.href = `${paypalUrl}?note=${note}`;
-            }, 1500);
+                window.open("https://www.paypal.com/paypalme/festivaldellafoto/8", "_blank");
+                form.reset();
+                setSocioMode(false);
+            }, 1200);
         } else {
-            alert('Errore nell\'invio. Riprova più tardi.');
+            response.text().then(text => {
+                console.error('Body risposta errore:', text);
+                alert('Errore nell\'invio. Riprova più tardi.');
+            });
         }
-    }).catch(function() {
+    }).catch(function(error) {
+        console.error('Errore di connessione:', error);
         alert('Errore di connessione. Riprova più tardi.');
     });
 });
 
-iscrizioneSwitch.addEventListener('change', function() {
-    iscrizioneSwitchBtn.classList.toggle('active', this.checked);
-    document.getElementById('cognome').disabled = !this.checked;
-    document.getElementById('telefono').disabled = !this.checked;
-    document.getElementById('codiceFiscale').disabled = !this.checked;
-    document.getElementById('indirizzo').disabled = !this.checked; // toggle indirizzo
-    // Disabilita oggetto e messaggio se iscrizione attiva
-    document.getElementById('oggetto').disabled = this.checked;
-    document.getElementById('message').disabled = this.checked;
-    if (!this.checked) {
-        document.getElementById('cognome').value = '';
-        document.getElementById('telefono').value = '';
-        document.getElementById('codiceFiscale').value = '';
-        document.getElementById('indirizzo').value = ''; // reset indirizzo
-        document.getElementById('oggetto').value = '';
-        document.getElementById('message').value = '';
-    }
-    checkPaypalFields();
-    controlSendButton(); // NEW
-});
-
-// Gating bottoni su consenso privacy (aggiornato per usare controlSendButton)
-(function () {
-    const consent = document.getElementById('privacyConsent');
-    const paypalBtn = document.getElementById('paypalBtn');
-
-    function applyState() {
-        const ok = consent.checked;
-        if (!ok) {
-            paypalBtn.style.opacity = '.5';
-            paypalBtn.style.pointerEvents = 'none';
-        }
-        controlSendButton(); // delega stato "Invia"
-        checkPaypalFields(); // mantiene logica PayPal
-    }
-    consent.addEventListener('change', applyState);
-    applyState();
-})();
+// Stato iniziale
+setSocioMode(false);

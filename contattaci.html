@@ -100,26 +100,27 @@
                                 <label for="cognome" class="form-label">Cognome <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control rounded-pill" id="cognome" name="cognome"
-                                    placeholder="Il tuo cognome" disabled data-socio-field>
+                                    placeholder="Il tuo cognome" disabled data-socio-field required>
                             </div>
                             <div class="mb-3">
                                 <label for="telefono" class="form-label">Telefono <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control rounded-pill" id="telefono" name="telefono"
-                                    placeholder="Il tuo telefono" disabled data-socio-field>
+                                    placeholder="Il tuo telefono" disabled data-socio-field required>
                             </div>
                             <div class="mb-3">
                                 <label for="codiceFiscale" class="form-label">Codice Fiscale <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control rounded-pill" id="codiceFiscale"
-                                    name="codiceFiscale" placeholder="Il tuo codice fiscale" disabled data-socio-field>
+                                    name="codiceFiscale" placeholder="Il tuo codice fiscale" disabled data-socio-field
+                                    required>
                             </div>
                             <!-- NUOVO CAMPO INDIRIZZO (solo soci) -->
                             <div class="mb-3">
                                 <label for="indirizzo" class="form-label">Indirizzo <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control rounded-pill" id="indirizzo" name="indirizzo"
-                                    placeholder="Via / Piazza, Numero Civico, Città" disabled data-socio-field>
+                                    placeholder="Via / Piazza, Numero Civico, Città" disabled data-socio-field required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">La tua Email <span
@@ -163,10 +164,6 @@
                                 </button>
                             </div>
                             <div class="d-grid mt-3">
-                                <!-- Da rimuovere il mio paypal -->
-                                <!-- Da rimuovere il mio paypal -->
-                                <!-- Da rimuovere il mio paypal -->
-                                <!-- Da rimuovere il mio paypal -->
                                 <a href="https://www.paypal.com/paypalme/festivaldellafoto/8" target="_blank"
                                     class="btn btn-warning btn-lg rounded-pill" id="paypalBtn"
                                     style="pointer-events:none; opacity:0.5;">
@@ -344,12 +341,9 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="contattaci.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
-
 </body>
 
 </html>

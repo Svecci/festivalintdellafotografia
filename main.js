@@ -312,3 +312,280 @@ document.addEventListener("DOMContentLoaded", function() {
             // Kickstart
             onScroll();
         })();
+
+
+        
+const eventi = [
+
+  // MAGGIO
+  {
+    titolo: "Amerigo Vespucci",
+    luogo: "Genova",
+    dataInizio: "05/05/2026",
+    dataFine: "09/05/2026",
+    descrizione: "Visita della nave Amerigo Vespucci"
+  },
+
+  {
+    titolo: "Sagra del Pesce",
+    luogo: "Camogli",
+    dataInizio: "09/05/2026",
+    dataFine: "10/05/2026",
+    descrizione: "Falò e spettacolo pirotecnico il 9 maggio"
+  },
+
+  {
+    titolo: "Festa del Limone",
+    luogo: "Monterosso",
+    dataInizio: "16/05/2026",
+    dataFine: "17/05/2026",
+    descrizione: "Evento dedicato ai limoni"
+  },
+
+  {
+    titolo: "Meditaggiasca",
+    luogo: "Taggia",
+    dataInizio: "01/05/2026",
+    dataFine: "02/05/2026",
+    descrizione: "Expo dell'oliva taggiasca, street food e show cooking"
+  },
+
+  {
+    titolo: "Festival Internazionale della Fotografia",
+    luogo: "Liguria",
+    dataInizio: "21/05/2026",
+    dataFine: "24/05/2026",
+    descrizione: "Festival fotografico internazionale"
+  },
+
+  {
+    titolo: "Frecce Tricolori",
+    luogo: "Varazze",
+    dataInizio: "17/05/2026",
+    dataFine: "17/05/2026",
+    descrizione: "Esibizione aerea"
+  },
+
+  {
+    titolo: "Festa della Focaccia",
+    luogo: "Recco",
+    dataInizio: "24/05/2026",
+    dataFine: "24/05/2026",
+    descrizione: "Evento dedicato alla focaccia"
+  },
+
+  // GIUGNO
+  {
+    titolo: "Festa della Repubblica",
+    luogo: "Genova",
+    dataInizio: "02/06/2026",
+    dataFine: "02/06/2026",
+    descrizione: "Fuochi in Piazza De Ferrari"
+  },
+
+  {
+    titolo: "Andersen Festival",
+    luogo: "Sestri Levante",
+    dataInizio: "04/06/2026",
+    dataFine: "07/06/2026",
+    descrizione: "Festival artistico e culturale"
+  },
+
+  {
+    titolo: "Mostra Internazionale della Filigrana",
+    luogo: "Campo Ligure",
+    dataInizio: "20/06/2026",
+    dataFine: "21/06/2026",
+    descrizione: "Mostra fotografica e artigianale"
+  },
+
+  {
+    titolo: "San Giovanni Battista",
+    luogo: "Imperia (Oneglia)",
+    dataInizio: "24/06/2026",
+    dataFine: "24/06/2026",
+    descrizione: "Fuochi al Porto Vecchio"
+  },
+
+  // LUGLIO
+  {
+    titolo: "Feste di Luglio",
+    luogo: "Rapallo",
+    dataInizio: "01/07/2026",
+    dataFine: "03/07/2026",
+    descrizione: "Celebrazioni e spettacoli"
+  },
+
+  {
+    titolo: "Sagra del Bagnun",
+    luogo: "Riva Trigoso",
+    dataInizio: "18/07/2026",
+    dataFine: "20/07/2026",
+    descrizione: "Sagra tradizionale sul mare"
+  },
+
+  {
+    titolo: "Festa del Santo Cristo",
+    luogo: "Moneglia",
+    dataInizio: "20/07/2026",
+    dataFine: "20/07/2026",
+    descrizione: "Festa religiosa tradizionale"
+  },
+
+  {
+    titolo: "Barcarolata",
+    luogo: "Sestri Levante",
+    dataInizio: "26/07/2026",
+    dataFine: "26/07/2026",
+    descrizione: "Sfilata e spettacolo pirotecnico"
+  },
+
+  {
+    titolo: "Assalti dei Pirati",
+    luogo: "Ponente Ligure",
+    dataInizio: "31/07/2026",
+    dataFine: "01/08/2026",
+    descrizione: "Rievocazione storica piratesca"
+  },
+
+  // AGOSTO
+  {
+    titolo: "Stella Maris",
+    luogo: "Camogli",
+    dataInizio: "02/08/2026",
+    dataFine: "02/08/2026",
+    descrizione: "Celebrazione sul mare"
+  },
+
+  {
+    titolo: "Madonnina del Mare",
+    luogo: "Zoagli",
+    dataInizio: "05/08/2026",
+    dataFine: "05/08/2026",
+    descrizione: "Festa religiosa sul mare"
+  },
+
+  {
+    titolo: "San Lorenzo a Manarola",
+    luogo: "Manarola",
+    dataInizio: "10/08/2026",
+    dataFine: "10/08/2026",
+    descrizione: "Celebrazione tradizionale"
+  },
+
+  {
+    titolo: "Torta dei Fieschi",
+    luogo: "Lavagna",
+    dataInizio: "14/08/2026",
+    dataFine: "14/08/2026",
+    descrizione: "Rievocazione storica medievale"
+  },
+
+  {
+    titolo: "Madonna Bianca",
+    luogo: "Portovenere",
+    dataInizio: "17/08/2026",
+    dataFine: "17/08/2026",
+    descrizione: "Processione e illuminazione"
+  },
+
+  // SETTEMBRE
+  {
+    titolo: "Sagra del Fuoco",
+    luogo: "Recco",
+    dataInizio: "05/09/2026",
+    dataFine: "08/09/2026",
+    descrizione: "Gran finale l'8 settembre"
+  }
+
+];
+function parseData(dataString) {
+
+  const [giorno, mese, anno] = dataString.split("/");
+
+  return new Date(anno, mese - 1, giorno);
+}
+
+function getEventoCorrente() {
+
+  const oggi = new Date();
+
+  return eventi.find(e => {
+
+    const start = parseData(e.dataInizio);
+    const end = parseData(e.dataFine);
+
+    end.setHours(23, 59, 59);
+
+    return oggi >= start && oggi <= end;
+
+  }) || eventi.find(e => parseData(e.dataInizio) > oggi);
+}
+
+function aggiornaEvento() {
+
+  const box = document.querySelector(".evento-box");
+  const evento = getEventoCorrente();
+
+  if (!evento) return;
+
+  box.classList.add("fade");
+
+  setTimeout(() => {
+
+    document.getElementById("titolo").innerText =
+      `${evento.titolo} - ${evento.luogo}`;
+
+    document.getElementById("data").innerText =
+      `${evento.dataInizio} → ${evento.dataFine}`;
+
+    document.getElementById("descrizione").innerText =
+      evento.descrizione;
+
+    box.classList.remove("fade");
+
+  }, 300);
+}
+
+function countdown() {
+
+  const evento = getEventoCorrente();
+
+  if (!evento) return;
+
+  const fine = parseData(evento.dataFine);
+
+  fine.setHours(23, 59, 59);
+
+  const now = new Date();
+
+  const diff = fine - now;
+
+  if (diff <= 0) {
+
+    aggiornaEvento();
+    return;
+
+  }
+
+  const giorni = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  const ore = Math.floor(
+    (diff / (1000 * 60 * 60)) % 24
+  );
+
+  const minuti = Math.floor(
+    (diff / 1000 / 60) % 60
+  );
+
+  document.getElementById("countdown").innerText =
+    `⏳ Finisce tra ${giorni}g ${ore}h ${minuti}m`;
+}
+
+/* INIT */
+
+aggiornaEvento();
+countdown();
+
+setInterval(countdown, 60000);
+setInterval(aggiornaEvento, 600000);

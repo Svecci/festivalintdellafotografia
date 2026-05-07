@@ -589,3 +589,22 @@ countdown();
 
 setInterval(countdown, 60000);
 setInterval(aggiornaEvento, 600000);
+
+function initGallery() {
+  const mainImage = document.getElementById('mainImage');
+  const thumbnails = document.querySelectorAll('.thumbnails .thumb');
+  if (!mainImage || thumbnails.length === 0) return;
+
+  thumbnails.forEach((thumb) => {
+    thumb.style.cursor = 'pointer';
+    thumb.addEventListener('click', () => {
+      if (thumb.classList.contains('active')) return;
+      thumbnails.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      mainImage.src = thumb.src;
+      mainImage.alt = thumb.alt || 'Immagine evento';
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initGallery);

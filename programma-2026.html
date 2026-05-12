@@ -82,7 +82,7 @@
               <span class="badge date-badge bg-light text-dark">Programma</span>
               <h5 class="text-white mt-2 mb-0">Festival 2026</h5>
             </div>
-            <button class="stretched-link btn p-0 m-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf="./Immagini/Documenti/Festival2026.pdf" data-title="Programma Festival 2026"></button>
+            <a href="./Immagini/Documenti/Festival2026.pdf" target="_blank" class="stretched-link btn p-0 m-0 border-0 bg-transparent"></a>
           </div>
         </div>
 
@@ -118,23 +118,7 @@
       </div>
     </div>
 
-    <!-- Modal PDF Viewer -->
-    <div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="pdfModalTitle" class="modal-title">Programma Festival 2026</h5>
-            <div class="ms-2">
-              <a id="pdfOpenLink" class="btn btn-sm btn-outline-secondary me-2" href="#" target="_blank" rel="noopener">Apri in nuova scheda</a>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-0">
-            <iframe id="pdfViewer" src="" style="width:100%; height:80vh; border:0;" frameborder="0"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
      <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
@@ -171,30 +155,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var pdfModal = document.getElementById('pdfModal');
-      if (pdfModal) {
-        pdfModal.addEventListener('show.bs.modal', function (event) {
-          var btn = event.relatedTarget;
-          var pdf = btn && btn.getAttribute('data-pdf') ? btn.getAttribute('data-pdf') : './Immagini/Documenti/Festival2026.pdf';
-          var title = btn && btn.getAttribute('data-title') ? btn.getAttribute('data-title') : 'Programma Festival 2026';
-          document.getElementById('pdfModalTitle').textContent = title;
-          var viewer = document.getElementById('pdfViewer');
-          var openLink = document.getElementById('pdfOpenLink');
-          if (viewer) viewer.src = pdf + '#view=FitH';
-          if (openLink) openLink.href = pdf;
-        });
-        pdfModal.addEventListener('hidden.bs.modal', function () {
-          var viewer = document.getElementById('pdfViewer');
-          var openLink = document.getElementById('pdfOpenLink');
-          if (viewer) viewer.src = '';
-          if (openLink) openLink.href = '#';
-        });
-      }
-    });
-    </script>
     <script src="programma.js"></script>
 </body>
 </html>
